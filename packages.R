@@ -1,0 +1,7 @@
+library(bayesplot)
+library(coda)
+library(greta)
+library(palmerpenguins)
+library(stats)
+library(tidyverse)
+library(conflicted)
