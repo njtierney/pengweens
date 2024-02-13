@@ -1,7 +1,4 @@
-library(palmerpenguins)
-library(tidyverse)
-library(bayesplot)
-
+source("packages.R")
 # we are going to build a model to predict the sex of an individual penguin
 # based on measurements of that individual.
 
@@ -68,7 +65,6 @@ non_bayesian_model <- glm(
 summary(non_bayesian_model)
 
 # now let's fit the Bayesian equivalent
-library(greta)
 
 # define priors
 intercept <- normal(0, 10)
@@ -100,12 +96,12 @@ draws <- mcmc(m)
 plot(draws)
 
 # we can also use bayesplot to explore the convergence of the model
-bayesplot::mcmc_trace(draws)
-bayesplot::mcmc_dens(draws)
+mcmc_trace(draws)
+mcmc_dens(draws)
 
 # check convergence (we already discarded burn-in and don't need the
 # multivariate stat)
-coda::gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
+gelman.diag(draws, autoburnin = FALSE, multivariate = FALSE)
 
 # look at the parameter estimates
 summary(draws)
@@ -235,7 +231,6 @@ penguins_prediction_body_mass_conditional_summary %>%
 # this next step is inspired by the well worked vignette,
 # "graphical PPCs", found at:
 # https://cran.r-project.org/web/packages/bayesplot/vignettes/graphical-ppcs.html
-library(bayesplot)
 
 # to do this we need some simulated predictions
 # in a regular glm model, you might do something like:
